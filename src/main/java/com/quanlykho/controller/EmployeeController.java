@@ -60,8 +60,9 @@ public class EmployeeController {
     	System.out.println("productId: " + id);
     	Product p = productService.getProductById(id);
     	LocalDate date = LocalDate.now();
-    	String dateString = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    	Entity importP = new Entity(id, p.getNameProduct(), dateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String dateString = date.format(formatter);
+        Entity importP = new Entity(id, p.getNameProduct(), dateString, p.getPrice());
         model.addAttribute("entity", importP);
         return "import_form";
     }
@@ -75,6 +76,7 @@ public class EmployeeController {
     	Product p = productService.getProductById(entity.getProductId());
     	System.out.println("pricipal.getName = " + principal.getName());
     	Employee e = employeeService.findByName(principal.getName());
+        entity.setPrice(p.getPrice()*entity.getNumber());
     	ImportProduct imp = Convert.entityToImportProduct(entity, p, e);
         productService.importProducts(imp);
         redirect.addFlashAttribute("successMessage", "Import successfully!");
@@ -86,8 +88,9 @@ public class EmployeeController {
     	System.out.println("productId: " + id);
     	Product p = productService.getProductById(id);
     	LocalDate date = LocalDate.now();
-    	String dateString = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    	Entity exportP = new Entity(id, p.getNameProduct(), dateString);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String dateString = date.format(formatter);
+        Entity exportP = new Entity(id, p.getNameProduct(), dateString, p.getPrice());
         model.addAttribute("entity", exportP);
         return "export_form";
     }
@@ -101,6 +104,7 @@ public class EmployeeController {
     	Product p = productService.getProductById(entity.getProductId());
     	System.out.println("pricipal.getName = " + principal.getName());
     	Employee e = employeeService.findByName(principal.getName());
+        entity.setPrice(p.getPrice()*entity.getNumber());
     	ExportProduct exp = Convert.entityToExportProduct(entity, p, e);
         productService.exportProducts(exp);
         redirect.addFlashAttribute("successMessage", "Export successfully!");

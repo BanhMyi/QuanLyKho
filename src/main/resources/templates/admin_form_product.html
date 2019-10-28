@@ -20,6 +20,12 @@
 						th:if="${#fields.hasErrors('nameProduct')}" th:errors="*{nameProduct}"></em>
 				</div>
 
+				 <div class="form-group">
+                    <input class="form-control" type="number" placeholder="Price"
+                        th:field="*{price}" />
+                </div>
+
+
 				<div class="form-group">
 					<input class="form-control" type="number" placeholder="Number"
 						th:field="*{number}" th:errorclass="field-error" /> <em

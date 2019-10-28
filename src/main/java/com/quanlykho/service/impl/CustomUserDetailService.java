@@ -37,7 +37,10 @@ public class CustomUserDetailService implements UserDetailsService {
 		Employee user = userRepository.findByUserName(userName);
 
         if (user == null) {
-            throw new ApplicationException("Username " + userName + " not found");
+            throw new ApplicationException("Username " + userName + " not found or password is not correct" );
+        }
+        if (user.getStatus().equals("deactive")) {
+             throw new ApplicationException("Username " + userName + " deactive");
         }
 
         System.out.println("Found User: " + user.getUserName() + "         role: " + user.getRole());

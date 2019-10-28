@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "export_product")
@@ -25,6 +26,10 @@ public class ExportProduct {
 	@Column(name = "date_export")
 	private String dateExport;
 
+    @Column(name = "price")
+    @NotNull
+    private Double price;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
 	private Employee employee;
@@ -33,11 +38,12 @@ public class ExportProduct {
 	@JoinColumn(name = "product_id", nullable = false)
 	private Product product;
 
-	public ExportProduct(Integer number, String date, Employee e, Product p) {
+	public ExportProduct(Integer number, String date, Employee e, Product p, Double price) {
 		this.number = number;
 		this.dateExport = date;
 		this.employee = e;
 		this.product = p;
+		this.price = price;
 	}
 
 	public ExportProduct() {
@@ -83,5 +89,14 @@ public class ExportProduct {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 
 }

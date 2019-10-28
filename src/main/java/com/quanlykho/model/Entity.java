@@ -20,6 +20,8 @@ public class Entity {
 	@NotNull
 	private Integer number;
 
+	private Double price;
+
 	public Entity() {
 	}
 
@@ -30,19 +32,21 @@ public class Entity {
 	}
 
 
-	public Entity(Integer productId, String productName, Integer userId, String userName, String date, Integer number) {
+	public Entity(Integer productId, String productName, Integer userId, String userName, String date, Integer number, Double price) {
 		this.productId = productId;
 		this.productName = productName;
 		this.userId = userId;
 		this.userName = userName;
 		this.date = date;
 		this.number = number;
+		this.price = price;
 	}
 
-	public Entity(@NotNull Integer productId, String productName, String date) {
+	public Entity(@NotNull Integer productId, String productName, String date, Double price) {
 		this.productId = productId;
 		this.productName = productName;
 		this.date = date;
+		this.price = price;
 	}
 
 	public Integer getProductId() {
@@ -80,6 +84,14 @@ public class Entity {
 	}
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 

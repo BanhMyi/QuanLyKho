@@ -34,6 +34,10 @@ public class Product {
  	@NotNull
  	private Integer number;
 
+    @Column(name = "price")
+    @NotNull
+    private double price;
+
  	@Column(name = "active")
  	private Integer active;
 
@@ -72,6 +76,12 @@ public class Product {
 	}
 	public void setNumber(Integer number) {
 		this.number = number;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
 	}
 
 

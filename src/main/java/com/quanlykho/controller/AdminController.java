@@ -54,8 +54,9 @@ public class AdminController {
     public String add(Model model) {
     	Product product = new Product();
     	LocalDate date = LocalDate.now();
-    	String importDate = date.format(DateTimeFormatter.ISO_LOCAL_DATE);
-    	product.setImportDate(importDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        String dateString = date.format(formatter);
+        product.setImportDate(dateString);
         model.addAttribute("product", product);
         return "admin_form_product.html";
     }
